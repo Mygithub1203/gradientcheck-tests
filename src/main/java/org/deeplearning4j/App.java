@@ -11,6 +11,8 @@ import org.deeplearning4j.nn.conf.layers.DenseLayer;
 import org.deeplearning4j.nn.conf.layers.OutputLayer;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.deeplearning4j.nn.weights.WeightInit;
+import org.nd4j.linalg.api.buffer.DataBuffer;
+import org.nd4j.linalg.api.buffer.util.DataTypeUtil;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.dataset.DataSet;
 import org.nd4j.linalg.lossfunctions.LossFunctions;
@@ -35,6 +37,7 @@ public class App {
         String[] activFns = {"sigmoid","tanh","relu","hardtanh","softplus"};
         boolean[] characteristic = {false,true};	//If true: run some backprop steps first
 
+        DataTypeUtil.setDTypeForContext(DataBuffer.Type.DOUBLE);
         LossFunctions.LossFunction[] lossFunctions = {LossFunctions.LossFunction.MCXENT, LossFunctions.LossFunction.MSE};
         String[] outputActivations = {"softmax","tanh"};	//i.e., lossFunctions[i] used with outputActivations[i] here
 
