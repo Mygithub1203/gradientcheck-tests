@@ -11,8 +11,11 @@ import org.deeplearning4j.nn.conf.layers.DenseLayer;
 import org.deeplearning4j.nn.conf.layers.OutputLayer;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.deeplearning4j.nn.weights.WeightInit;
+import org.nd4j.linalg.api.buffer.DataBuffer;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.dataset.DataSet;
+import org.nd4j.linalg.factory.NDArrayFactory;
+import org.nd4j.linalg.factory.Nd4j;
 import org.nd4j.linalg.lossfunctions.LossFunctions;
 
 import static org.junit.Assert.assertTrue;
@@ -27,12 +30,18 @@ public class App {
     private static final double DEFAULT_EPS = 1e-3;
     private static final double DEFAULT_MAX_REL_ERROR = 1e-3;
 
+    static {
+        Nd4j.dtype = DataBuffer.Type.DOUBLE;
+        NDArrayFactory factory = Nd4j.factory();
+        factory.setDType(DataBuffer.Type.DOUBLE);
+    }
+
     public static void main( String[] args) {
         //Parameterized test, testing combinations of:
         // (a) activation function
         // (b) Whether to test at random initialization, or after some learning (i.e., 'characteristic mode of operation')
         // (c) Loss function (with specified output activations)
-        String[] activFns = {"sigmoid","tanh","relu","hardtanh","softplus"};
+        String[] activFns = {"sigmoid","tanh","softplus"};
         boolean[] characteristic = {false,true};	//If true: run some backprop steps first
 
         LossFunctions.LossFunction[] lossFunctions = {LossFunctions.LossFunction.MCXENT, LossFunctions.LossFunction.MSE};
