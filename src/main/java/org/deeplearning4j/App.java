@@ -34,7 +34,7 @@ public class App {
         // (a) activation function
         // (b) Whether to test at random initialization, or after some learning (i.e., 'characteristic mode of operation')
         // (c) Loss function (with specified output activations)
-        String[] activFns = {"sigmoid","tanh","relu","hardtanh","softplus"};
+        String[] activFns = {"sigmoid","tanh","softplus"};
         boolean[] characteristic = {false,true};	//If true: run some backprop steps first
 
         DataTypeUtil.setDTypeForContext(DataBuffer.Type.DOUBLE);
